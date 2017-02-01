@@ -1,0 +1,25 @@
+#container
+{
+width:900px;
+margin:0 auto;
+overflow:auto;
+}
+#header
+{
+height:90px;
+}
+#nav
+{
+height:30px;
+}
+#main
+{
+overflow:auto;
+}
+#footer
+{
+height:40px;
+}
+.reglabel{
+	font-size: 20px;
+}
