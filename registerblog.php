@@ -1,39 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Register</title>
-</head>
-<body>
-<form action="" method="post">
-<div>
-    <label><b>First Name</b></label><br>
-   <input type="text" placeholder="Enter First Name" name="fname" required="">
-</div>
-<div>
-   <label><b>Last Name</b></label><br>
-   <input type="text" placeholder="Enter Last Name" name="lname" required="">
-</div>
-<div>
-   <label><b>Email</b></label><br>
-   <input type="Email" placeholder="Enter your Email address" name="email" required="">
-</div>
-<div>
-   <label><b>Contact No.</b></label><br>
-   <input type="text" placeholder="Enter Phone No." name="pno" required="">
-</div>
-<div>
-   <label><b>Password</b></label><br>
-   <input type="Password" placeholder="Enter Password" name="pwd" required="">
-</div>
-<div>
-   <label><b>Confirm Password</b></label><br>
-   <input type="Password" placeholder="Enter Password Again" name="cpwd" required="">
-</div>
-<div>
-   <button type="submit">Register</button> 
-   </form>
-</div>
-</body>
-</html>
+<?php
+$serverName="localhost";
+$userName="root";
+$password="";
+$dbName="registerblog";
+$conn=new mysqli($serverName,$userName,$password,$dbName);
 
 
+if ($conn->connect_error) {
+   die("Connection Failed".$conn->connect_error);
+} else {
+   echo "Connected Successfully";
+}
+
+
+$a=$_POST["firstname"];
+$b=$_POST["lastname"];
+$c=$_POST["email"];
+$d=$_POST["password"];
+
+
+$insertQuery="INSERT INTO bloguser(FirstName,LastName,Email,Password) VALUES ('".$a."', '".$b."', '".$c."', '".$d."')";
+if ($conn->query($insertQuery)==TRUE) {
+   echo "Record Updated";
+} else {
+   echo "Error".$insertQuery."<br>".$conn->error;
+}
+
+
+?>
