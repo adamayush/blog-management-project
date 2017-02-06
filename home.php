@@ -1,34 +1,30 @@
+<?php 
+
+session_start();
+$user = $_SESSION['user'];
+require('connection.php');
+$a="SELECT subject FROM bloguser WHERE Email='$user[Email]'";
+$b="SELECT blog FROM bloguser WHERE Email='$user[Email]'";
+
+
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Home-Blog</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="style1.css">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style1.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-
-
-<?php
-var_dump($_POST);
-
-var_dump($_FILES);
-$a=$_POST["subject"];
-$b=$_POST["comment"];
- ?>
-
-
 <div class="color" style="background-color: #E0FFFF;"> 
-
-
-
-
-
 
 <!--topmost bar containing home and other options-->
 <nav class="navbar navbar-inverse" style="">
@@ -44,14 +40,11 @@ $b=$_POST["comment"];
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">Deals</a></li>
-        <li><a href="#">Stores</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+        <li><a href="logout.php">Logout</a></li>
       </ul>
     </div>
   </div>
@@ -102,17 +95,18 @@ $b=$_POST["comment"];
     </a>
 </div>
 <div>
-	<h2 style="color: #000; text-align: center;"><b>BLOGS :</b></h2>
-	<div>
-	<?php  
-		echo "<font color='#000' size='20'>".$a."</font>";
-		?>
-	</div>
-	<div>
-		<?php 
-		echo "<font color='#000' size='5'>".$b."</font>";
-		 ?>
-	</div>
+	<h2 style="color: #000; text-align: center;font-size: 40px;padding: 30px;"><b>BLOGS :</b></h2>
+</div>
+
+<div>
+<?php 
+  echo "<font color='#000' size='7'>".$a."</font>";
+  ?>
+</div>
+<div>
+<?php
+  echo "<font color='#000' size='5'>".$b."</font>";
+   ?>
 </div>
 </body>
 </html>
