@@ -112,9 +112,9 @@ while($blogPost = mysqli_fetch_assoc($blogPosts)) {
   <div class="row">
     <div class="col-sm-12">
       <div class="panel panel-primary">
-        <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='5'>".$blogPost['subject']."</font>"; echo "<br />";?></b></div>
+        <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='8'>".$blogPost['subject']."</font>"; echo "<br />";?></b></div>
         <div class="subject"><?php
-  echo "<font size='3'>".$blogPost['blog']."</font>";
+  echo "<font size='5'>".$blogPost['blog']."</font>";
   echo "<br />";
   echo "<br />";
   echo "<br />";?></div>

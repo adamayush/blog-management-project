@@ -44,10 +44,11 @@ $blogPosts = mysqli_query($conn, "SELECT id, subject, blog FROM bloguser WHERE E
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
+        <li><a href="http://demoblog.local/blog.php">New Blog</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="http://demoblog.local/blog.php">New Blog</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span><?php echo "$user[Email]"?></a></li>
         <li><a href="logout.php">Logout</a></li>
       </ul>
     </div>

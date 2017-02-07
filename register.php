@@ -6,18 +6,7 @@ if (isset($_SESSION['user'])) {
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-  $serverName="localhost";
-  $userName="root";
-  $password="";
-  $dbName="registerblog";
-  $conn=new mysqli($serverName,$userName,$password,$dbName);
-
-
-  if ($conn->connect_error) {
-     die("Connection Failed".$conn->connect_error);
-  } else {
-     echo "Connected Successfully";
-  }
+  require('connection.php');
 
 
   $a=$_POST["firstname"];
