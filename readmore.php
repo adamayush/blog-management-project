@@ -8,8 +8,7 @@ $b="SELECT blog FROM bloguser WHERE Email='$user[Email]'";
 $c=$conn->query($a);
 $d=$conn->query($b);
 */
-
-$blogPosts = mysqli_query($conn, "SELECT id, subject, blog FROM bloguser WHERE Email='$user[Email]'"); 
+$blogPosts = mysqli_query($conn, "SELECT subject, blog FROM bloguser WHERE id='$_GET[id]'"); 
  ?>
 
 
@@ -115,22 +114,10 @@ while($blogPost = mysqli_fetch_assoc($blogPosts)) {
       <div class="panel panel-primary">
         <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='5'>".$blogPost['subject']."</font>"; echo "<br />";?></b></div>
         <div class="subject"><?php
-        if (strlen($blogPost['blog'])>=50) {
-          $blogPost['blog']=substr($blogPost['blog'], 0, 250);
-        
   echo "<font size='3'>".$blogPost['blog']."</font>";
-  }
-  else
-  {
-    echo "<font size='3'>".$blogPost['blog']."</font>";
-  } 
   echo "<br />";
   echo "<br />";
-  echo "<br />";?>
-    <div class="panel-footer">
-          <a href="http://demoblog.local/readmore.php?id=<?php echo $blogPost['id'] ?>"><u>Read more</u></a>
-        </div>
-  </div>
+  echo "<br />";?></div>
      
       </div>
     </div>

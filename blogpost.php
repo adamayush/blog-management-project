@@ -10,7 +10,7 @@ require('connection.php');
 $c=$_POST["subject"];
 $d=$_POST["comment"];
 
-$insertQuery="UPDATE bloguser SET subject='$c', blog='$d' WHERE Email='$user[Email]'";
+$insertQuery="INSERT INTO bloguser(Email,subject,blog) VALUES ('$user[Email]', '".$c."', '".$d."')";
 if ($conn->query($insertQuery)==TRUE) {
    header('Location: home.php');
 } else {

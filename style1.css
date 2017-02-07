@@ -30,6 +30,12 @@
       margin: auto;
       min-height:200px;
   }
+  .subject{
+   background-color: rgb(125,185,200);
+   color: #000;
+  border: 4px;
+}
+
 
 
   /* Hide the carousel text when the screen is less than 600 pixels wide */

@@ -2,6 +2,7 @@
 session_start();
 if (!isset($_SESSION['user'])) {
 	header('Location: login.php');
+
 }
 ?>
 <!DOCTYPE html>
@@ -21,6 +22,7 @@ if (!isset($_SESSION['user'])) {
     <textarea rows="10" cols="50" name="comment" placeholder="Enter your blog here..." required=""></textarea>
     <input type="file" name="image" accept="image/gif, image/jpeg, image/png" style="padding-bottom: 20px; color: #fff; size: 15px;">
     <input type="submit" class="submit" value="Submit">
+    <h6><a href="http://demoblog.local/home.php">Go To HOME</a></h6>
     <div>
     	<?php 
 
