@@ -1,30 +1,3 @@
-<?php
-session_start();
-if (isset($_SESSION['user'])) {
-  header('Location: blog.php');
-}
-
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-  require('connection.php');
-
-
-  $a=$_POST["firstname"];
-  $b=$_POST["lastname"];
-  $c=$_POST["email"];
-  $d=$_POST["password"];
-
-
-  $insertQuery="INSERT INTO bloguser(FirstName,LastName,Email,Password) VALUES ('".$a."', '".$b."', '".$c."', '".$d."')";
-  if ($conn->query($insertQuery)==TRUE) {
-      header('Location: login.php');
-  } else {
-     echo "Error".$insertQuery."<br>".$conn->error;
-  }
-}
-
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +21,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     <input type="submit" class="submit" value="Register">
     <h6><a href="http://demoblog.local/login.php">Already have account.</a></h6>
   </form>
+   <?php
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
+     require('registerdb.php');
+?>
 </div>
 </body>
 </html>

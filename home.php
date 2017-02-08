@@ -3,13 +3,9 @@
 session_start();
 $user = $_SESSION['user'];
 require('connection.php');
-/*$a="SELECT subject FROM bloguser WHERE Email='$user[Email]'";
-$b="SELECT blog FROM bloguser WHERE Email='$user[Email]'";
-$c=$conn->query($a);
-$d=$conn->query($b);
-*/
 
-$blogPosts = mysqli_query($conn, "SELECT id, subject, blog FROM bloguser WHERE Email='$user[Email]'"); 
+
+$blogPosts = mysqli_query($conn, "SELECT id, image,subject, blog FROM bloguser WHERE Email='$user[Email]'");
  ?>
 
 
@@ -99,6 +95,10 @@ $blogPosts = mysqli_query($conn, "SELECT id, subject, blog FROM bloguser WHERE E
       <span class="sr-only">Next</span>
     </a>
 </div>
+
+
+
+
 <div style="background-image: url(img2.jpg); opacity: 0.9">
 <div>
 	<h2 style="color: #000; text-align: center;font-size: 60px;padding: 50px;"><b><u>BLOGS :</u></b></h2>
@@ -115,6 +115,12 @@ while($blogPost = mysqli_fetch_assoc($blogPosts)) {
     <div class="col-sm-12">
       <div class="panel panel-primary">
         <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='5'>".$blogPost['subject']."</font>"; echo "<br />";?></b></div>
+        <?php
+        if(!$blogPost['image']==null)
+        echo "<img width='20%' src='uploads/$blogPost[image]' />";
+        
+        ?>
+
         <div class="subject"><?php
         if (strlen($blogPost['blog'])>=50) {
           $blogPost['blog']=substr($blogPost['blog'], 0, 250);

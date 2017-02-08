@@ -12,17 +12,18 @@ $c=$_POST["subject"];
 $d=$_POST["comment"];
 
 
-$uploads_dir = '/uploads';
-foreach ($_FILES["image"]["error"] as $key => $error) {
+$uploads_dir = 'uploads';
+$error = $_FILES["image"]["error"];
     if ($error == UPLOAD_ERR_OK) {
-        $tmp_name = $_FILES["image"]["tmp_name"][$key];
+        $tmp_name = $_FILES["image"]["tmp_name"];
         // basename() may prevent filesystem traversal attacks;
         // further validation/sanitation of the filename may be appropriate
-        $name = basename($_FILES["image"]["name"][$key]);
-        move_uploaded_file($tmp_name, "$uploads_dir/$name");
-        var_dump($name);exit;
+        $name = basename($_FILES["image"]["name"]);
+        $res = move_uploaded_file($tmp_name, $uploads_dir ."/" . $name);
+        if (!$res) {
+            echo "Could not upload file"; exit;
+        }
     }
-}
 
 $insertQuery="INSERT INTO bloguser(Email,subject,blog,image) VALUES ('$user[Email]', '".$c."', '".$d."', '".$name."')";
 if ($conn->query($insertQuery)==TRUE) {

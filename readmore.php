@@ -8,7 +8,7 @@ $b="SELECT blog FROM bloguser WHERE Email='$user[Email]'";
 $c=$conn->query($a);
 $d=$conn->query($b);
 */
-$blogPosts = mysqli_query($conn, "SELECT subject, blog FROM bloguser WHERE id='$_GET[id]'"); 
+$blogPosts = mysqli_query($conn, "SELECT subject, image, blog FROM bloguser WHERE id='$_GET[id]'"); 
  ?>
 
 
@@ -113,6 +113,11 @@ while($blogPost = mysqli_fetch_assoc($blogPosts)) {
     <div class="col-sm-12">
       <div class="panel panel-primary">
         <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='8'>".$blogPost['subject']."</font>"; echo "<br />";?></b></div>
+        <?php
+        if(!$blogPost['image']==null)
+        echo "<img width='20%' src='uploads/$blogPost[image]' />";
+        
+        ?>
         <div class="subject"><?php
   echo "<font size='5'>".$blogPost['blog']."</font>";
   echo "<br />";
