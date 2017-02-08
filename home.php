@@ -4,8 +4,7 @@ session_start();
 $user = $_SESSION['user'];
 require('connection.php');
 
-
-$blogPosts = mysqli_query($conn, "SELECT id, image,subject, blog FROM bloguser WHERE Email='$user[Email]'");
+$blogPost = mysqli_query($conn, "SELECT id, featured_image, title, body FROM posts WHERE user_id='$user[id]'");
  ?>
 
 
@@ -44,8 +43,16 @@ $blogPosts = mysqli_query($conn, "SELECT id, image,subject, blog FROM bloguser W
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span><?php echo "$user[Email]"?></a></li>
-        <li><a href="logout.php">Logout</a></li>
+      <li class="dropdown" style="width: 40%;">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <img src="uploads/<?php echo "$user[profile_image]"?>" class="profile-image img-circle" style="width: 20%;"><?php echo "    $user[first_name]"?><b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><a href="#">Account</a></li>
+        <li class="divider"></li>
+        <li><a href="logout.php">Sign-out</a></li>
+    </ul>
+</li>
+        
       </ul>
     </div>
   </div>
@@ -108,34 +115,34 @@ $blogPosts = mysqli_query($conn, "SELECT id, image,subject, blog FROM bloguser W
 
  <?php
 
-while($blogPost = mysqli_fetch_assoc($blogPosts)) {
+while($blogPosts = mysqli_fetch_assoc($blogPost)) {
   ?>
   <div class="container" style="padding-top: 40px;">    
   <div class="row">
     <div class="col-sm-12">
       <div class="panel panel-primary">
-        <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='5'>".$blogPost['subject']."</font>"; echo "<br />";?></b></div>
+        <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='5'>".$blogPosts['title']."</font>"; echo "<br />";?></b></div>
         <?php
-        if(!$blogPost['image']==null)
-        echo "<img width='20%' src='uploads/$blogPost[image]' />";
+        if(!$blogPosts['featured_image']==null)
+        echo "<img width='20%' src='uploads/$blogPosts[featured_image]' />";
         
         ?>
 
         <div class="subject"><?php
-        if (strlen($blogPost['blog'])>=50) {
-          $blogPost['blog']=substr($blogPost['blog'], 0, 250);
+        if (strlen($blogPosts['body'])>=50) {
+          $blogPosts['body']=substr($blogPosts['body'], 0, 250);
         
-  echo "<font size='3'>".$blogPost['blog']."</font>";
+  echo "<font size='3'>".$blogPosts['body']."</font>";
   }
   else
   {
-    echo "<font size='3'>".$blogPost['blog']."</font>";
+    echo "<font size='3'>".$blogPosts['body']."</font>";
   } 
   echo "<br />";
   echo "<br />";
   echo "<br />";?>
     <div class="panel-footer">
-          <a href="http://demoblog.local/readmore.php?id=<?php echo $blogPost['id'] ?>"><u>Read more</u></a>
+          <a href="http://demoblog.local/readmore.php?id=<?php echo $blogPosts['id'] ?>"><u>Read more</u></a>
         </div>
   </div>
      

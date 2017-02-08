@@ -25,7 +25,7 @@ $error = $_FILES["image"]["error"];
         }
     }
 
-$insertQuery="INSERT INTO bloguser(Email,subject,blog,image) VALUES ('$user[Email]', '".$c."', '".$d."', '".$name."')";
+$insertQuery="INSERT INTO posts(user_id, title,body,featured_image) VALUES ($user[id], '$c', '$d', '$name')";
 if ($conn->query($insertQuery)==TRUE) {
    header('Location: home.php');
 } else {

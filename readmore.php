@@ -8,7 +8,7 @@ $b="SELECT blog FROM bloguser WHERE Email='$user[Email]'";
 $c=$conn->query($a);
 $d=$conn->query($b);
 */
-$blogPosts = mysqli_query($conn, "SELECT subject, image, blog FROM bloguser WHERE id='$_GET[id]'"); 
+$blogPosts = mysqli_query($conn, "SELECT title, body, featured_image FROM posts WHERE user_id='$user[id]'"); 
  ?>
 
 
@@ -42,12 +42,20 @@ $blogPosts = mysqli_query($conn, "SELECT subject, image, blog FROM bloguser WHER
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="home.php">Home</a></li>
+        <li><a href="http://demoblog.local/blog.php">New Blog</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="http://demoblog.local/blog.php">New Blog</a></li>
-        <li><a href="logout.php">Logout</a></li>
+      <li class="dropdown" style="width: 40%;">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <img src="uploads/<?php echo "$user[profile_image]"?>" class="profile-image img-circle" style="width: 20%;"><?php echo "    $user[first_name]"?><b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><a href="#">Account</a></li>
+        <li class="divider"></li>
+        <li><a href="logout.php">Sign-out</a></li>
+    </ul>
+</li>
       </ul>
     </div>
   </div>
@@ -112,14 +120,14 @@ while($blogPost = mysqli_fetch_assoc($blogPosts)) {
   <div class="row">
     <div class="col-sm-12">
       <div class="panel panel-primary">
-        <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='8'>".$blogPost['subject']."</font>"; echo "<br />";?></b></div>
+        <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='8'>".$blogPost['title']."</font>"; echo "<br />";?></b></div>
         <?php
-        if(!$blogPost['image']==null)
-        echo "<img width='20%' src='uploads/$blogPost[image]' />";
+        if(!$blogPost['featured_image']==null)
+        echo "<img width='20%' src='uploads/$blogPost[featured_image]' />";
         
         ?>
         <div class="subject"><?php
-  echo "<font size='5'>".$blogPost['blog']."</font>";
+  echo "<font size='5'>".$blogPost['body']."</font>";
   echo "<br />";
   echo "<br />";
   echo "<br />";?></div>

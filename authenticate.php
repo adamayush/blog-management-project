@@ -2,7 +2,7 @@
      require('connection.php');
     $a= $_POST["email"];
     $b= $_POST["password"];
-    $authQuery = "SELECT * FROM bloguser WHERE Email='".$a."' AND Password= '".$b."'";
+    $authQuery = "SELECT * FROM users WHERE email='".$a."' AND password= '".$b."'";
 
     $resultSet = $conn->query($authQuery);
     $invalid="Invalid username or password.";
