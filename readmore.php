@@ -5,7 +5,8 @@ require('connection.php');
 $a=$_GET['id'];
 
 $blogPosts = mysqli_query($conn, "SELECT title, body, featured_image FROM posts WHERE id='$a'"); 
-$blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='$a'");
+$blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='$a' ORDER BY created_at DESC");
+
 
 
 
@@ -42,14 +43,16 @@ $blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="home.php">Home</a></li>
+        <li><a href="user_home.php">Home</a></li>
         <li><a href="http://demoblog.local/blog.php">New Blog</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="login.php">login</a></li>
+        <li><a href="logout.php">Login</a></li>
+        <li><a href="register.php">Sign-Up</a></li>
     </ul>
 </li>
+        
       </ul>
     </div>
   </div>
@@ -161,7 +164,9 @@ $blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='
         </div >
  <?php
           if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-          require('comment.php');}?>
+          require('comment.php');}
+          ?>
+
        </div>
   <?php
 }

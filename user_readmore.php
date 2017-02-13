@@ -10,9 +10,7 @@ require('connection.php');
 $a=$_GET['id'];
 
 $blogPosts = mysqli_query($conn, "SELECT title, body, featured_image FROM posts WHERE user_id='$user[id]'"); 
-$blogC = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='$a'");
-$blogComment = mysqli_query($conn,"SELECT * FROM comments ORDER BY created_at DESC");
-
+$blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='$a' ORDER BY created_at DESC");
 
  ?>
 
