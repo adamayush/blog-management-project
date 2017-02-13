@@ -27,7 +27,7 @@ $error = $_FILES["image"]["error"];
 
 $insertQuery="INSERT INTO posts(user_id, title,body,featured_image) VALUES ($user[id], '$c', '$d', '$name')";
 if ($conn->query($insertQuery)==TRUE) {
-   header('Location: home.php');
+   header('Location: user_home.php');
 } else {
    echo "Error".$insertQuery."<br>".$conn->error;
 }

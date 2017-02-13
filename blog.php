@@ -29,8 +29,10 @@ require('connection.php');
  
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="home.php">Home</a></li>
+        <li><a href="home.php">Home</a></li>
         <li><a href="http://demoblog.local/blog.php">New Blog</a></li>
+                <li><a href="http://demoblog.local/user_home.php">My Blogs</a></li>
+
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -65,13 +67,6 @@ require('connection.php');
     <input type="file" name="image" accept="image/gif, image/jpeg, image/png" style="padding-bottom: 20px;text-align: center; ;color: #fff; size: 15px;">
     <input type="submit" class="submit" value="Submit">
     <div>
-    	<?php 
-
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-require('blogpost');
-
-  }
-  ?>
     </div>
   </form>
 </div>

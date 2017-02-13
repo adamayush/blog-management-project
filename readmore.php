@@ -1,14 +1,14 @@
 <?php 
 
-session_start();
-$user = $_SESSION['user'];
 require('connection.php');
-/*$a="SELECT subject FROM bloguser WHERE Email='$user[Email]'";
-$b="SELECT blog FROM bloguser WHERE Email='$user[Email]'";
-$c=$conn->query($a);
-$d=$conn->query($b);
-*/
-$blogPosts = mysqli_query($conn, "SELECT title, body, featured_image FROM posts WHERE user_id='$user[id]'"); 
+
+$a=$_GET['id'];
+
+$blogPosts = mysqli_query($conn, "SELECT title, body, featured_image FROM posts WHERE id='$a'"); 
+$blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='$a'");
+
+
+
  ?>
 
 
@@ -42,18 +42,12 @@ $blogPosts = mysqli_query($conn, "SELECT title, body, featured_image FROM posts 
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="home.php">Home</a></li>
+        <li><a href="home.php">Home</a></li>
         <li><a href="http://demoblog.local/blog.php">New Blog</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown" style="width: 40%;">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    <img src="uploads/<?php echo "$user[profile_image]"?>" class="profile-image img-circle" style="width: 20%;"><?php echo "    $user[first_name]"?><b class="caret"></b></a>
-    <ul class="dropdown-menu">
-        <li><a href="#">Account</a></li>
-        <li class="divider"></li>
-        <li><a href="logout.php">Sign-out</a></li>
+        <li><a href="login.php">login</a></li>
     </ul>
 </li>
       </ul>
@@ -106,38 +100,74 @@ $blogPosts = mysqli_query($conn, "SELECT title, body, featured_image FROM posts 
     </a>
 </div>
 <div style="background-image: url(img2.jpg); opacity: 0.9">
-<div>
-	<h2 style="color: #000; text-align: center;font-size: 60px;padding: 50px;"><b><u>BLOGS :</u></b></h2>
-</div>
+  <div>
+	 <h2 style="color: #000; text-align: center;font-size: 60px;padding: 50px;"><b><u>BLOGS :</u></b></h2>
+  </div>
 
 <div style="text-align: center;">
 
- <?php
+    <?php
 
-while($blogPost = mysqli_fetch_assoc($blogPosts)) {
-  ?>
+      while($blogPost = mysqli_fetch_assoc($blogPosts)) {
+    ?>
   <div class="container" style="padding-top: 40px;">    
-  <div class="row">
-    <div class="col-sm-12">
+    <div class="row">
+     <div class="col-sm-12">
       <div class="panel panel-primary">
-        <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='8'>".$blogPost['title']."</font>"; echo "<br />";?></b></div>
+        <div class="panel-heading" style="text-align: center; background-image: url(bgsub.jpg);"><b><?php echo "<font color='#000' size='8'>".$blogPost['title']."</font>"; echo "<br />";?></b>
+        </div>
         <?php
         if(!$blogPost['featured_image']==null)
         echo "<img width='20%' src='uploads/$blogPost[featured_image]' />";
         
         ?>
-        <div class="subject"><?php
-  echo "<font size='5'>".$blogPost['body']."</font>";
-  echo "<br />";
-  echo "<br />";
-  echo "<br />";?></div>
-     
-      </div>
+   <div class="subject"><?php
+        echo "<font size='5'>".$blogPost['body']."</font>";
+        echo "<br />";
+        echo "<br />";
+        echo "<br />";?>
+    
+    <div class="panel-footer">
+        <div class="container">
+        <span class="likebtn-wrapper" data-identifier="item_1"></span>
+<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+          <a class="comment" data-toggle="collapse" data-target="#comment" style="float: left;"><b>Comment : </b></a>
+            <div id="comment" class="collapse">
+            <form class="form" method="post" action="">
+             <textarea rows="2" cols="60" name="comment_area" placeholder="Comment Here..." style="float: left;"></textarea>
+             <input type="hidden" name="post_id" value="<?php echo $_GET['id'] ?>">
+             <input type="submit" class="submit" value="Post" style="padding: 10px;">
+             </form>
+             
+             
+           </div>
+           
+        </div>
+              
     </div>
+    <div style="text-align: left;background-color: #A0A0A0">
+              <?php
+
+              $i=1;
+                while($blogComments = mysqli_fetch_assoc($blogComment)) {
+                  
+              ?>
+              <p style="font-size: 20px;"><?php echo "<font color=#000>".$i.". ".$blogComments['comment']."</font>";?><br></p>
+          
+               <?php $i++;}
+               ?>
+              </div>
+   </div>
+        </div >
+ <?php
+          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          require('comment.php');}?>
+       </div>
   <?php
 }
    ?>
-</div>
+    </div>
+  </div>
 </div>
 </body>
 </html>

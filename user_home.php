@@ -1,14 +1,24 @@
 <?php 
+session_start();
 require('connection.php');
 
+if (!isset($_SESSION['user'])) {
+  header('Location: login.php');
   $blogPost = mysqli_query($conn, "SELECT id, featured_image, title, body FROM posts");
+
+}
+
+$user = $_SESSION['user'];
+
+
+$blogPost = mysqli_query($conn, "SELECT id, featured_image, title, body FROM posts WHERE user_id='$user[id]'");
  ?>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home-Blog</title>
+	<title>User-Home-Blog</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -35,13 +45,19 @@ require('connection.php');
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="user_home.php">Home</a></li>
+        <li><a href="home.php">Home</a></li>
         <li><a href="http://demoblog.local/blog.php">New Blog</a></li>
+                <li><a href="http://demoblog.local/user_home.php">My Blogs</a></li>
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php">Login</a></li>
-        <li><a href="register.php">Sign-Up</a></li>
+      <li class="dropdown" style="width: 40%;">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <img src="uploads/<?php echo "$user[profile_image]"?>" class="profile-image img-circle" style="width: 20%;"><?php echo "    $user[first_name]"?><b class="caret"></b></a>
+    <ul class="dropdown-menu">
+        <li><a href="#">Account</a></li>
+        <li class="divider"></li>
+        <li><a href="logout.php">Sign-out</a></li>
     </ul>
 </li>
         
@@ -134,7 +150,7 @@ while($blogPosts = mysqli_fetch_assoc($blogPost)) {
   echo "<br />";
   echo "<br />";?>
     <div class="panel-footer">
-          <a href="http://demoblog.local/readmore.php?id=<?php echo $blogPosts['id'] ?>"><u>Read more</u></a>
+          <a href="http://demoblog.local/user_readmore.php?id=<?php echo $blogPosts['id'] ?>"><u>Read more</u></a>
         </div>
   </div>
      

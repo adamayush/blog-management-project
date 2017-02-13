@@ -8,10 +8,12 @@ if (isset($_SESSION['user'])) {
 <html>
 <head>
 	<title>Login</title>
+
  <link rel="stylesheet" type="text/css" href="blogstyle.css">
 </head>
 <body>
-<div class="wrapper" style="text-align: center; padding: 200px 550px;">
+<div class="wrapper" style="text-align: center; padding: 150px 550px;">
+    <a href="home.php"><img src="blogimg.jpg" style="width: 40%;"></a>
   <h1>LOGIN</h1>
   <p>To login you should be registered once if not click on the register now link below.</p>
   <form class="form" method="post" action="">
