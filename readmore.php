@@ -1,17 +1,22 @@
 <?php 
-
+session_start();
 require('connection.php');
 
-$a=$_GET['id'];
+ 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+require('comment.php');
+}
+  
 
+$a=$_GET['id'];
+$i=1;
 $blogPosts = mysqli_query($conn, "SELECT title, body, featured_image FROM posts WHERE id='$a'"); 
 $blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='$a' ORDER BY created_at DESC");
-
-
+//$bloglikes = mysqli_query($conn, "SELECT likes_count FROM likes WHERE post_id='$a'");
+//$bloglikes = $bloglikes->fetch_assoc();
 
 
  ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -132,9 +137,63 @@ $blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='
     
     <div class="panel-footer">
         <div class="container">
-        <span class="likebtn-wrapper" data-identifier="item_1"></span>
-<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
-          <a class="comment" data-toggle="collapse" data-target="#comment" style="float: left;"><b>Comment : </b></a>
+          
+<script>
+
+var postId = <?php echo $a ?>;
+
+//$(function() {
+  
+ //   $('.like-button').click(function(){
+function loadDoc() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "index.php?id=" + postId, true);
+  xhttp.send();
+}
+
+      //  var obj = $(this);
+       // if( obj.data('liked') ){
+       //     obj.data('liked', false);
+       //     obj.html('Like');
+         //   loadDoc();
+      //  }
+      //  else{
+       //     obj.data('liked', true);
+       //     obj.html('Unlike');
+       //     loadDoc();
+      //  }
+    //});
+//});
+</script>
+          <button type="button" onclick="loadDoc()">like</button><p id="demo"></p>
+          <a class="comment" data-toggle="collapse" data-target="#comment" style="float: left; cursor: pointer;"><b>Comment : </b></a> 
+          <div style="padding-right: 80px;">
+          <?php if (!isset($_SESSION['user'])) {
+              $login = "Please login to comment";
+              echo "<a href='login.php'>".$login."</a>";
+          ?>
+          <div style="text-align: left;background-color: #A0A0A0">
+              <?php
+
+              $i=1;
+                while($blogComments = mysqli_fetch_assoc($blogComment)) {
+                  
+              ?>
+              <p style="font-size: 20px;"><?php echo "<font color=#000>".$i.". ".$blogComments['comment']."</font>";?><br></p>
+          
+               <?php $i++;}
+               ?>
+              </div>
+   </div>
+        </div >
+        <?php exit(); 
+        }}?>
+          </div>
             <div id="comment" class="collapse">
             <form class="form" method="post" action="">
              <textarea rows="2" cols="60" name="comment_area" placeholder="Comment Here..." style="float: left;"></textarea>
@@ -157,20 +216,13 @@ $blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='
               ?>
               <p style="font-size: 20px;"><?php echo "<font color=#000>".$i.". ".$blogComments['comment']."</font>";?><br></p>
           
-               <?php $i++;}
+               <?php $i++;
+             }
                ?>
               </div>
    </div>
         </div >
- <?php
-          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-          require('comment.php');}
-          ?>
 
-       </div>
-  <?php
-}
-   ?>
     </div>
   </div>
 </div>

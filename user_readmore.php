@@ -27,6 +27,7 @@ $blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='
   <link rel="stylesheet" type="text/css" href="style1.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
 </head>
 <body>
 
@@ -139,7 +140,7 @@ $blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='
     <div class="panel-footer">
         <div class="container">
         <span class="likebtn-wrapper" data-identifier="item_1"></span>
-<script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
+
           <a class="comment" data-toggle="collapse" data-target="#comment" style="float: left;"><b>Comment : </b></a>
             <div id="comment" class="collapse">
             <form class="form" method="post" action="">
@@ -170,7 +171,9 @@ $blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='
         </div >
  <?php
           if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-          require('comment.php');}?>
+          require('comment.php');}
+
+          ?>
        </div>
   <?php
 }
