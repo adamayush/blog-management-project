@@ -11,7 +11,7 @@ require('comment.php');
 $a=$_GET['id'];
 $i=1;
 $blogPosts = mysqli_query($conn, "SELECT title, body, featured_image FROM posts WHERE id='$a'"); 
-$blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='$a' ORDER BY created_at DESC");
+$blogComment = mysqli_query($conn, "SELECT comment,user FROM comments WHERE post_id='$a' ORDER BY created_at DESC");
 //$bloglikes = mysqli_query($conn, "SELECT likes_count FROM likes WHERE post_id='$a'");
 //$bloglikes = $bloglikes->fetch_assoc();
 
@@ -53,7 +53,7 @@ $blogComment = mysqli_query($conn, "SELECT comment FROM comments WHERE post_id='
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php">Login</a></li>
+        <li><a href="logout.php">Login/Logout</a></li>
         <li><a href="register.php">Sign-Up</a></li>
     </ul>
 </li>
@@ -155,6 +155,16 @@ function loadDoc() {
   xhttp.open("GET", "index.php?id=" + postId, true);
   xhttp.send();
 }
+function loadDoc1() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo1").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "init.php?id=" + postId, true);
+  xhttp.send();
+}
 
       //  var obj = $(this);
        // if( obj.data('liked') ){
@@ -170,7 +180,8 @@ function loadDoc() {
     //});
 //});
 </script>
-          <button type="button" onclick="loadDoc()">like</button><p id="demo"></p>
+          <a onclick="loadDoc()"><img src="like.jpg" style="width: 3%;"><p id="demo"></p></a>
+         <a onclick="loadDoc1()"><img src="dislike.jpg" style="width: 3%;"><p id="demo1"></p></a>
           <a class="comment" data-toggle="collapse" data-target="#comment" style="float: left; cursor: pointer;"><b>Comment : </b></a> 
           <div style="padding-right: 80px;">
           <?php if (!isset($_SESSION['user'])) {
@@ -185,7 +196,7 @@ function loadDoc() {
                   
               ?>
               <p style="font-size: 20px;"><?php echo "<font color=#000>".$i.". ".$blogComments['comment']."</font>";?><br></p>
-          
+              <p style="font-size: 10px;"><?php echo "<font color=#000>"."By : ".". ".$blogComments['user']."</font>";?><br></p>
                <?php $i++;}
                ?>
               </div>
@@ -215,7 +226,7 @@ function loadDoc() {
                   
               ?>
               <p style="font-size: 20px;"><?php echo "<font color=#000>".$i.". ".$blogComments['comment']."</font>";?><br></p>
-          
+              <p style="font-size: 10px;"><?php echo "<font color=#000>"."By : ".". ".$blogComments['user']."</font>";?><br></p>
                <?php $i++;
              }
                ?>

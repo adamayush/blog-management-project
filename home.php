@@ -40,7 +40,7 @@ require('connection.php');
         <li><a href="#">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout.php">Login</a></li>
+        <li><a href="logout.php">Login/Logout</a></li>
         <li><a href="register.php">Sign-Up</a></li>
     </ul>
 </li>
