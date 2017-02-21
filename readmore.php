@@ -10,10 +10,10 @@ require('comment.php');
 
 $a=$_GET['id'];
 $i=1;
-$blogPosts = mysqli_query($conn, "SELECT title, body, featured_image FROM posts WHERE id='$a'"); 
-$blogComment = mysqli_query($conn, "SELECT comment,user FROM comments WHERE post_id='$a' ORDER BY created_at DESC");
-//$bloglikes = mysqli_query($conn, "SELECT likes_count FROM likes WHERE post_id='$a'");
-//$bloglikes = $bloglikes->fetch_assoc();
+$blogPosts = "SELECT title, body, featured_image FROM posts WHERE id='$a'"; 
+    $blogPosts = $conn->query($blogPosts);
+$blogComment = "SELECT comment,user FROM comments WHERE post_id='$a' ORDER BY created_at DESC";
+    $blogComment = $conn->query($blogComment);
 
 
  ?>
@@ -116,7 +116,7 @@ $blogComment = mysqli_query($conn, "SELECT comment,user FROM comments WHERE post
 
     <?php
 
-      while($blogPost = mysqli_fetch_assoc($blogPosts)) {
+      while($blogPost = $blogPosts->fetch(PDO::FETCH_ASSOC)) {
     ?>
   <div class="container" style="padding-top: 40px;">    
     <div class="row">
@@ -166,19 +166,6 @@ function loadDoc1() {
   xhttp.send();
 }
 
-      //  var obj = $(this);
-       // if( obj.data('liked') ){
-       //     obj.data('liked', false);
-       //     obj.html('Like');
-         //   loadDoc();
-      //  }
-      //  else{
-       //     obj.data('liked', true);
-       //     obj.html('Unlike');
-       //     loadDoc();
-      //  }
-    //});
-//});
 </script>
           <a onclick="loadDoc()"><img src="like.jpg" style="width: 3%;"><p id="demo"></p></a>
          <a onclick="loadDoc1()"><img src="dislike.jpg" style="width: 3%;"><p id="demo1"></p></a>
@@ -192,7 +179,7 @@ function loadDoc1() {
               <?php
 
               $i=1;
-                while($blogComments = mysqli_fetch_assoc($blogComment)) {
+                while($blogComments = $blogComment->fetch(PDO::FETCH_ASSOC)) {
                   
               ?>
               <p style="font-size: 20px;"><?php echo "<font color=#000>".$i.". ".$blogComments['comment']."</font>";?><br></p>
@@ -222,7 +209,7 @@ function loadDoc1() {
               <?php
 
               $i=1;
-                while($blogComments = mysqli_fetch_assoc($blogComment)) {
+                while($blogComments = $blogComment->fetch(PDO::FETCH_ASSOC)) {
                   
               ?>
               <p style="font-size: 20px;"><?php echo "<font color=#000>".$i.". ".$blogComments['comment']."</font>";?><br></p>

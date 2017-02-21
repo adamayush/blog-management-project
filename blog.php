@@ -25,7 +25,7 @@ require('connection.php');
 
 
 <div>
-<nav class="navbar navbar-inverse" style="">
+<nav class="navbar navbar-inverse" style="background-color: #000;">
  
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -56,7 +56,7 @@ require('connection.php');
 
 
 
-<div style="text-align: center; padding: 200px 550px;">
+<div style="padding: 100px 548px;">
   <h1>SUBMIT YOUR BLOG HERE</h1>
   <p>Add a subject for you blog and start writing in the text area of blog given below.</p>
 
@@ -65,7 +65,8 @@ require('connection.php');
     <input type="text" name="subject" placeholder="Title" required="">
     <textarea rows="10" cols="50" name="comment" placeholder="Enter your blog here..." required=""></textarea>
     <input type="file" name="image" accept="image/gif, image/jpeg, image/png" style="padding-bottom: 20px;text-align: center; ;color: #fff; size: 15px;">
-    <input type="submit" class="submit" value="Submit">
+    <br>
+    <input type="submit" class="submit" value="Submit" style="color: #FFFF00;">
     <div>
     </div>
   </form>

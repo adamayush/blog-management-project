@@ -11,8 +11,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $a=$_POST["firstname"];
   $b=$_POST["lastname"];
-  $c=$_POST["email"];
+  $e=$_POST["email"];
+  
   $d=$_POST["password"];
+
 
 $invalid="You can use only alphabets in First and Last name.";
 
@@ -21,7 +23,13 @@ echo "<font color='red'>".$invalid."</font>";
 exit;
 }
 
-      
+      $c= filter_var($e, FILTER_SANITIZE_EMAIL);
+
+// Validate e-mail
+if (!filter_var($e, FILTER_VALIDATE_EMAIL) === false) {
+} else {
+    echo("$email is not a valid email address");
+}
 
 //uploading the image
   $uploads_dir = 'uploads';

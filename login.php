@@ -13,7 +13,7 @@ if (isset($_SESSION['user'])) {
 
 </head>
 <body>
-<div class="wrapper" style="text-align: center; padding: 150px 550px;">
+<div class="wrapper" style="text-align: center; padding: 100px 250px;">
     <a href="home.php"><img src="blogimg.jpg" style="width: 40%;"></a>
   <h1>LOGIN</h1>
   <p>To login you should be registered once if not click on the register now link below.</p>

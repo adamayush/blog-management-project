@@ -1,39 +1,26 @@
- <?php
-     require('connection.php');
-    $a= $_POST["email"];
-    $b= $_POST["password"];
-    $authQuery = "SELECT * FROM users WHERE email='".$a."' AND password= '".$b."'";
 
-    $resultSet = $conn->query($authQuery);
-    $invalid="Invalid username or password.";
-    
-    if($resultSet->num_rows>0)
-    {
-
-        $_SESSION['user'] = $resultSet->fetch_assoc();
-        header("Location: blog.php");
-    exit;
-    } else{
-        
-	echo "<font color='red'>".$invalid."</font>";
-    }
-
-    ?>
     <?php
-    // require('connection.php');
-   // $a= $_POST["email"];
-   // $b= $_POST["password"];
-   // $authQuery = "SELECT * FROM users WHERE email='".$a."' AND password= '".$b."'";
+    require('connection.php');
+   $a= $_POST["email"];
+   $b= $_POST["password"];
+    $c= filter_var($a, FILTER_SANITIZE_EMAIL);
 
-   // $resultSet = $conn->query($authQuery);
-   // $invalid="Invalid username or password.";
-   // if($resultSet->rowCount()>0)
-   // {
+// Validate e-mail
+if (!filter_var($a, FILTER_VALIDATE_EMAIL) === false) {
+} else {
+    echo("$a is not a valid email address");
 
-   //     $_SESSION['user'] = $resultSet->fetch(PDO::FETCH_ASSOC);
-  // // exit;
-   // } else{
+}
+   $authQuery = "SELECT * FROM users WHERE email='".$c."' AND password= '".$b."'";
+
+   $resultSet = $conn->query($authQuery);
+   $invalid="Invalid username or password.";
+   if($resultSet->rowCount()>0)
+   {
+ $_SESSION['user'] = $resultSet->fetch(PDO::FETCH_ASSOC);
+  exit;
+   } else{
         
-   // echo "<font color='red'>".$invalid."</font>";
-  //
+   echo "<font color='red'>".$invalid."</font>";
+ }
     ?>

@@ -1,7 +1,8 @@
 <?php 
 require('connection.php');
 
-  $blogPost = mysqli_query($conn, "SELECT id, featured_image, title, body FROM posts");
+  $blogPost = "SELECT id, featured_image, title, body FROM posts";
+   $blogPost = $conn->query($blogPost);
  ?>
 
 
@@ -107,7 +108,7 @@ require('connection.php');
 
  <?php
 
-while($blogPosts = mysqli_fetch_assoc($blogPost)) {
+while($blogPosts = $blogPost->fetch(PDO::FETCH_ASSOC)) {
   ?>
   <div class="container" style="padding-top: 40px;">    
   <div class="row">
