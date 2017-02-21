@@ -1,9 +1,10 @@
 <?php
 require('connection.php');
 $user = $_SESSION['user'];
+$user_email = $user['email'];
 $c=$_POST["comment_area"];
 $d=$_POST["post_id"];
-$insertQuery="INSERT INTO comments(post_id, user, comment) VALUES ('".$d."', '".$user[email]."', '".$c."')";
+$insertQuery="INSERT INTO comments(post_id, user, comment) VALUES ('".$d."', '".$user_email."', '".$c."')";
 
 if ($conn->query($insertQuery)==TRUE) {
    

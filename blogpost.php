@@ -32,3 +32,6 @@ if ($conn->query($insertQuery)==TRUE) {
    echo "Error".$insertQuery."<br>".$conn->error;
 }
  ?>
+
+
+ 

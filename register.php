@@ -5,7 +5,7 @@
  <link rel="stylesheet" type="text/css" href="blogstyle.css">
 </head>
 <body>
-<div class="wrapper" style="text-align: center; padding: 200px 550px;">
+<div class="wrapper" style="text-align: center; padding: 100px 550px;">
   <h1>REGISTER FOR FREE</h1>
   <p>To sign-up for a free basic account please provide us with some basic information using
   the contact form below. Please use valid credentials.</p>
